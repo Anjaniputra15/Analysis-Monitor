@@ -1,6 +1,11 @@
 # Analysis-Monitor - Service Monitoring Dashboard
 
+<img width="1147" alt="Screenshot 1947-03-09 at 5 38 58 PM" src="https://github.com/user-attachments/assets/8715a539-bff9-49ae-82b1-bcba8e80b793" />
+
 Analysis-Monitor is a powerful, terminal-based service monitoring dashboard built with Python and Textual. It provides real-time monitoring of web services, with features for uptime tracking, latency measurement, and alert notifications.
+
+
+
 
 ## Features
 
