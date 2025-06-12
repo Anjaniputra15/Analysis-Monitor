@@ -37,9 +37,13 @@ class ServiceMonitor:
         """Check a single service and return its status."""
         url = f"{service['url']}{service['path']}"
         start_time = datetime.now()
-        
+
         try:
-            response = await self._client.get(url)
+            if self._client is None:
+                async with httpx.AsyncClient(timeout=self.timeout) as client:
+                    response = await client.get(url)
+            else:
+                response = await self._client.get(url)
             latency = (datetime.now() - start_time).total_seconds()
             
             return {
@@ -50,6 +54,9 @@ class ServiceMonitor:
                 'timestamp': datetime.now().isoformat(),
                 'status_code': response.status_code
             }
+        except httpx.TimeoutException:
+            # Propagate timeout exceptions so retry logic can handle them
+            raise
         except Exception as e:
             return self._create_error_response(service, str(e))
 
