@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Services</h1>
+    <ul>
+    {% for service in services %}
+        <li>{{ service.name }} - {{ service.url }}{{ service.path }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

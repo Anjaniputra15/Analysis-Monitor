@@ -47,6 +47,13 @@ Run Analysis-Monitor from the command line:
 ```bash
 python main.py
 ```
+### Starting the Web Interface
+
+Run the FastAPI server:
+```bash
+python run_web.py
+```
+
 
 ### Adding Services
 
