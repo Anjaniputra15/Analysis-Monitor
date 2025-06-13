@@ -96,22 +96,23 @@ class HistoryManager:
     def save_history(self) -> None:
         """Save history data to file."""
         try:
+            backup_file = self.history_file.with_suffix('.json.bak')
+
             # Create backup of existing file
             if self.history_file.exists():
-                backup_file = self.history_file.with_suffix('.json.bak')
                 self.history_file.rename(backup_file)
-            
+
             # Save new data
             with open(self.history_file, 'w') as f:
                 json.dump(self._cache, f, indent=4)
-            
+
             # Clear pending updates
             self._pending_updates = []
-            
+
             # Remove backup if save was successful
             if backup_file.exists():
                 backup_file.unlink()
-                
+
         except Exception as e:
             self.logger.error(f"Error saving history: {str(e)}")
             # Restore backup if save failed

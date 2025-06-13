@@ -77,19 +77,20 @@ class ConfigManager:
     def save_config(self) -> None:
         """Save configuration to file."""
         try:
+            backup_file = self.config_file.with_suffix('.json.bak')
+
             # Create backup of existing file
             if self.config_file.exists():
-                backup_file = self.config_file.with_suffix('.json.bak')
                 self.config_file.rename(backup_file)
-            
+
             # Save new data
             with open(self.config_file, 'w') as f:
                 json.dump(self.config, f, indent=4)
-            
+
             # Remove backup if save was successful
             if backup_file.exists():
                 backup_file.unlink()
-                
+
         except Exception as e:
             self.logger.error(f"Error saving config: {str(e)}")
             # Restore backup if save failed
